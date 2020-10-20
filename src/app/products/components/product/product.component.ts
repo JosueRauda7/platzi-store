@@ -1,4 +1,5 @@
 import { Product } from '../../../product.model';
+import { CartService } from '../../../core/services/cart.service';
 import {
   Component,
   Input,
@@ -23,7 +24,7 @@ export class ProductComponent implements OnInit, DoCheck, OnDestroy {
 
   today: Date = new Date();
 
-  constructor() {
+  constructor(private cartService: CartService) {
     console.log('constructor');
   }
 
@@ -45,6 +46,7 @@ export class ProductComponent implements OnInit, DoCheck, OnDestroy {
 
   addCart(): void {
     console.log('Añadir al carrito');
-    this.productClicked.emit(this.product.id);
+    this.cartService.addCart(this.product);
+    // this.productClicked.emit(this.product.id);
   }
 }
