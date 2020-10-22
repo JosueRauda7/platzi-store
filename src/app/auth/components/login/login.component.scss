@@ -1,0 +1,9 @@
+form{
+    width: 90%;
+}
+@media (min-width: 576px){
+  form{
+    margin: auto;
+    width: 40%;
+  }
+}

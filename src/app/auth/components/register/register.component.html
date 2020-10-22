@@ -1,0 +1,30 @@
+<form [formGroup]="form" (ngSubmit)="login($event)">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Registrarse</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <input formControlName="correo" type="email" placeholder="Correo Electrónico" matInput>
+            <mat-error *ngIf="form.get('correo').invalid">Correo introducido es inválido</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input formControlName="password" type="password" matInput placeholder="Contraseña">
+            <mat-error *ngIf="form.get('password').invalid">Contraseña debe ser mayor a 7 carácteres</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Confirmar</button>
+      <a routerLink="./../login" mat-raised-button>Cancelar</a>
+    </mat-card-actions>
+  </mat-card>
+</form>
