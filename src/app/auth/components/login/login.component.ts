@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.buildForm();
   }
@@ -29,6 +31,15 @@ export class LoginComponent implements OnInit {
 
   login(event: Event): void {
     event.preventDefault();
-    this.router.navigate(['']);
+    if(this.form.valid){
+      const value = this.form.value;
+      this.authService.login(value.correo, value.password)
+      .then(() => {
+        this.router.navigate(['/admin']);
+      })
+      .catch(() => {
+        alert('Usuario no válido');
+      });
+    }
   }
 }
