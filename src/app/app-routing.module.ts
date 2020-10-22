@@ -4,6 +4,7 @@ import { DemoComponent } from './demo/demo.component';
 import { Page404Component } from './page404/page404.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AdminGuard } from './admin.guard';
+import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
   {
@@ -22,13 +23,11 @@ const routes: Routes = [
       },
       {
         path: 'products',
-        canActivate: [AdminGuard],
         loadChildren: () =>
           import('./products/products.module').then((m) => m.ProductsModule),
       },
       {
         path: 'contact',
-        canActivate: [AdminGuard],
         loadChildren: () =>
           import('./contact/contact.module').then((m) => m.ContactModule),
       },
@@ -45,11 +44,13 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate: [AdminGuard],
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: 'auth',
+    canActivate: [LoginGuard],
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule)
   },
   {

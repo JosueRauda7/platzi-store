@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
     if(this.form.valid){
       const value = this.form.value;
       this.authService.createUser(value.correo, value.password)
-      .then(()=>{
+      .then(() => {
         this.router.navigate(['/auth/login']);
       });
     }
